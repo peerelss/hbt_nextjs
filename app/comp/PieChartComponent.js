@@ -11,7 +11,6 @@ const data = [
 const COLORS = ["#0088FE", "#FFBB28", "#FF8042"]; // 颜色数组
 
 const PieChartComponent = ({total}) => {
-    console.log("total", total);
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {

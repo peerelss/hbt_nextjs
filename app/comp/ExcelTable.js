@@ -39,7 +39,7 @@ export default function ExcelTable({ box_no }) {
             <Button onClick={orderByIp}>按照ip排序</Button> <Button onClick={orderByStatus}>按照故障排序</Button>
             <HotTable
                 data={data}
-                colHeaders={["ip", "算力", "状态", "更新时间"]}
+                colHeaders={["ip段","ip", "算力", "状态", "更新时间"]}
                 rowHeaders={true}
                 colWidths={200}
                 licenseKey="non-commercial-and-evaluation"

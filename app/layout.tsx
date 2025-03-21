@@ -25,10 +25,25 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <nav style={{ display: "flex", justifyContent: "center", gap: "20px" }}>
-        <a href="/" style={{ flex: 1, textAlign: "center" }}>Home</a>
-          <a href="/table" style={{ flex: 1, textAlign: "center" }}>Table</a>
-          <a href="/box" style={{ flex: 1, textAlign: "center" }}>Box</a>
+        <nav
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: "40px", // 增加间距
+            padding: "10px",
+          }}
+        >
+          <a href="/" style={{ flex: 1, textAlign: "center", margin: "0 10px", backgroundColor: "lightblue" }}>
+            Home
+          </a> <a href="/total" style={{ flex: 1, textAlign: "center", margin: "0 10px", backgroundColor: "lightblue" }}>
+          total
+          </a>
+          <a href="/table" style={{ flex: 1, textAlign: "center", backgroundColor: "lightblue" }}>
+            Table
+          </a>
+          <a href="/box/11" style={{ flex: 1, textAlign: "center", margin: "0 10px", backgroundColor: "lightblue" }}>
+            Box
+          </a>
         </nav>
         {children}
       </body>
