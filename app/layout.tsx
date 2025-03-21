@@ -24,9 +24,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body>
+        <nav style={{ display: "flex", justifyContent: "center", gap: "20px" }}>
+        <a href="/" style={{ flex: 1, textAlign: "center" }}>Home</a>
+          <a href="/table" style={{ flex: 1, textAlign: "center" }}>Table</a>
+          <a href="/box" style={{ flex: 1, textAlign: "center" }}>Box</a>
+        </nav>
         {children}
       </body>
     </html>

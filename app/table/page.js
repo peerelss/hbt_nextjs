@@ -38,6 +38,7 @@ export default function Home() {
 
     return (
         <main>
+            <div>   </div>
             <div>
                 {box_no_list.map((item, index) => (
                     <Button key={index} onClick={() => handleClick(item)}>

@@ -22,7 +22,7 @@ const PieChartComponent = ({total}) => {
       return null; // 在服务器端渲染时不渲染任何内容
     }
   return (
-    <PieChart width={400} height={300}>
+    <PieChart width={500} height={300}>
       <Pie
         data={total }
         cx="50%"
