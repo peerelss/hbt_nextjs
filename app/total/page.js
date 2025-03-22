@@ -12,6 +12,9 @@ export default function Home() {
     const [total, setTotal] = useState({});
     const box_no_list = ['11', '12', '21', '22', '31', '32', '41', '42', '51', '52', '61', '62', '71', '72', '81', '82', '91', '92',
         '101', '102']
+    const box_no_list2 = [
+        ['11', '12'], ['21', '22'], ['31', '32'], ['41', '42'], ['51', '52'], ['61', '62'], ['71', '72'], ['81', '82'], ['91', '92'], ['101', '102']
+    ]
     useEffect(() => {
         fetch("/api/total") // 假设后端提供了此 API
             .then((res) => res.json())
@@ -83,9 +86,19 @@ export default function Home() {
             ))}
         </ul>
         <PieChartComponent total={data2pie(total)} />
-        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "24px", backgroundColor: grey }}>
+        <div style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: "24px",
+            backgroundColor: "grey",
+        }}>
             {data.map((item, index) => (
-                <div onClick={() => handleClick(item)} className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition" key={index}  >
+                <div onClick={() => handleClick(item)} className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition" key={index} style={{
+                    flex: "0 1 calc(50% - 12px)", // 50% 减去 gap 一半，确保两列对齐
+                    maxWidth: "calc(50% - 12px)", // 限制最大宽度，避免挤压
+                    padding:"10px", gap: "24px",
+                }} >
                     <h1 className="text-lg font-bold text-blue-500 text-center">{item.name}</h1>
                     <PieChartComponent total={item.value} />
                 </div>
