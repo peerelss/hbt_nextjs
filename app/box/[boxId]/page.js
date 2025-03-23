@@ -6,7 +6,8 @@ import { Button } from '@mui/material';
 import { useParams } from "next/navigation";
 import ExcelTable from "../../comp/ExcelTable";
 import PieChartComponent from "../../comp/PieChartComponent";
-export default function Home( ) {
+export default function Home({boxId}) {
+    console.log("boxId", boxId);    
     const params = useParams();
     const box_no=params.boxId;
     return (
