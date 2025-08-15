@@ -33,12 +33,12 @@ export default function RootLayout({
             padding: "10px",
           }}
         >
-          <a href="/" style={{ flex: 1, textAlign: "center", margin: "0 10px", backgroundColor: "lightblue" }}>
+          <a href="/" style={{ flex: 1, textAlign: "center", margin: "0 10px", backgroundColor: "red" }}>
             Home
-          </a> <a href="/boxes" style={{ flex: 1, textAlign: "center", margin: "0 10px", backgroundColor: "lightblue" }}>
+          </a> <a href="/boxes" style={{ flex: 1, textAlign: "center", margin: "0 10px", backgroundColor: "red" }}>
           boxes
           </a>
-           <a href="/task" style={{ flex: 1, textAlign: "center", margin: "0 10px", backgroundColor: "lightblue" }}>
+           <a href="/task" style={{ flex: 1, textAlign: "center", margin: "0 10px", backgroundColor: "red" }}>
           task
           </a>
         </nav>
