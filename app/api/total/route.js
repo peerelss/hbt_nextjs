@@ -1,5 +1,5 @@
  
-import { getSummary } from "../../lib/db";
+import { getSummary } from "../../lib/mongodb";
 
 export async function GET( ) {
   try {

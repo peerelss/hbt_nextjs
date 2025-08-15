@@ -35,14 +35,11 @@ export default function RootLayout({
         >
           <a href="/" style={{ flex: 1, textAlign: "center", margin: "0 10px", backgroundColor: "lightblue" }}>
             Home
-          </a> <a href="/total" style={{ flex: 1, textAlign: "center", margin: "0 10px", backgroundColor: "lightblue" }}>
-          total
+          </a> <a href="/boxes" style={{ flex: 1, textAlign: "center", margin: "0 10px", backgroundColor: "lightblue" }}>
+          boxes
           </a>
-          <a href="/table" style={{ flex: 1, textAlign: "center", backgroundColor: "lightblue" }}>
-            Table
-          </a>
-          <a href="/box/11" style={{ flex: 1, textAlign: "center", margin: "0 10px", backgroundColor: "lightblue" }}>
-            Box
+           <a href="/task" style={{ flex: 1, textAlign: "center", margin: "0 10px", backgroundColor: "lightblue" }}>
+          task
           </a>
         </nav>
         {children}
