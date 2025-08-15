@@ -6,15 +6,23 @@ export default function MinersPage() {
   const [miners, setMiners] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function fetchMiners() {
-      const res = await fetch("/api/task");
-      const data = await res.json();
-      setMiners(data);
-      setLoading(false);
-    }
-    fetchMiners();
-  }, []);
+useEffect(() => {
+  async function fetchMiners() {
+    const res = await fetch("/api/task");
+    const data = await res.json();
+    setMiners(data);
+    setLoading(false);
+  }
+
+  // 先执行一次
+  fetchMiners();
+
+  // 每 5 秒刷新一次
+  const intervalId = setInterval(fetchMiners, 5000);
+
+  // 组件卸载时清除定时器
+  return () => clearInterval(intervalId);
+}, []);
 
   if (loading) {
     return (
@@ -35,13 +43,14 @@ export default function MinersPage() {
               <th className="px-6 py-3 border-b text-left text-gray-600 font-semibold">IP 地址</th>
               <th className="px-6 py-3 border-b text-left text-gray-600 font-semibold">算力</th>
               <th className="px-6 py-3 border-b text-left text-gray-600 font-semibold">状态</th>
+              <th className="px-6 py-3 border-b text-left text-gray-600 font-semibold">时间戳</th>
             </tr>
           </thead>
           <tbody>
             {miners.map((miner) => (
               <tr key={miner._id} className="hover:bg-gray-50 transition">
                 <td className="px-6 py-3 border-b text-gray-800">{miner.ip}</td>
-                <td className="px-6 py-3 border-b text-gray-800">{miner.miner_box_id}</td>
+                <td className="px-6 py-3 border-b text-gray-800">{miner.hash_rate}</td>
                 <td
                   className={`px-6 py-3 border-b font-medium ${
                     miner.status?.includes("WinError")
@@ -51,6 +60,7 @@ export default function MinersPage() {
                 >
                   {miner.status}
                 </td>
+                  <td className="px-6 py-3 border-b text-gray-800">{miner.timestamp}</td>
               </tr>
             ))}
           </tbody>
