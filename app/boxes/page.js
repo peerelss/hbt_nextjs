@@ -20,7 +20,7 @@ export default function BoxesPage() {
   }, []);
 
   const filteredIps = selectedBox
-    ? miners.filter(m => m.box_id == selectedBox).map(m => m.ip)
+    ? miners.filter(m => m.box_id == selectedBox).map(m => m)
     : [];
 
   return (
@@ -56,7 +56,7 @@ export default function BoxesPage() {
               </tr>
               </thead>
               <tbody>
-              {miners.map((miner, index) => (
+              {filteredIps.map((miner, index) => (
                   <tr key={index} className="hover:bg-gray-50">
                     <td className="border px-2 py-1 text-center">{index + 1}</td>
                     <td className="border px-2 py-1 break-words">{miner.ip}</td>
