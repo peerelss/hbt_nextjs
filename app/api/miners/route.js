@@ -2,7 +2,7 @@ import clientPromise from "../../lib/mongodb";
 async function getCollection() {
   const client = await clientPromise;
   const db = client.db("miner_db_big_lake"); // 数据库名
-  return db.collection("miners_big_lake_task");
+  return db.collection("miners_big_lake");
 }
 
 // ✅ 查询所有 miners

@@ -30,8 +30,8 @@ export default function EditIPs() {
       return;
     }
 
-    const res = await fetch("/api/miners/delete", {
-      method: "POST",
+    const res = await fetch("/api/miners", {
+      method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ips: ipList }),
     });
