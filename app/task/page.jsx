@@ -69,6 +69,7 @@ export default function TaskPage() {
         <table className="table-auto w-full border border-gray-200 text-sm sm:text-base">
           <thead className="bg-gray-100">
             <tr>
+               <th className="border px-2 py-1">序号</th>
               <th className="border px-2 py-1">IP</th>
               <th className="border px-2 py-1">哈希率</th>
               <th className="border px-2 py-1">状态</th>
@@ -78,6 +79,7 @@ export default function TaskPage() {
           <tbody>
             {miners.map((miner, index) => (
               <tr key={index} className="hover:bg-gray-50">
+                  <td className="border px-2 py-1 text-center">{index + 1}</td>
                 <td className="border px-2 py-1 break-words">{miner.ip}</td>
                 <td className="border px-2 py-1">{miner.hash_rate}</td>
                 <td className="border px-2 py-1 text-red-500">
