@@ -8,19 +8,19 @@ export default function BoxesPage() {
 
   useEffect(() => {
     async function loadData() {
-      const res = await fetch("/api/miners");
+      const res = await fetch("/api/boxes");
       const data = await res.json();
       setMiners(data);
 
       // 去重矿箱 ID
-      const uniqueBoxIds = [...new Set(data.map(m => m.miner_box_id))];
+      const uniqueBoxIds = [...new Set(data.map(m => m.box_id))];
       setBoxIds(uniqueBoxIds);
     }
     loadData();
   }, []);
 
   const filteredIps = selectedBox
-    ? miners.filter(m => m.miner_box_id == selectedBox).map(m => m.ip)
+    ? miners.filter(m => m.box_id == selectedBox).map(m => m.ip)
     : [];
 
   return (
@@ -44,16 +44,32 @@ export default function BoxesPage() {
 
       {/* 显示 IP 列表 */}
       {selectedBox && (
-        <div className="bg-white rounded-lg shadow p-4">
-          <h3 className="text-lg font-semibold mb-3">
-            矿箱 {selectedBox} 的矿机 IP
-          </h3>
-          <ul className="list-disc pl-6">
-            {filteredIps.map((ip, idx) => (
-              <li key={idx} className="mb-1">{ip}</li>
-            ))}
-          </ul>
-        </div>
+          <div className="overflow-x-auto">
+            <table className="table-auto w-full border border-gray-200 text-sm sm:text-base">
+              <thead className="bg-gray-100">
+              <tr>
+                <th className="border px-2 py-1">序号</th>
+                <th className="border px-2 py-1">IP</th>
+                <th className="border px-2 py-1">哈希率</th>
+                <th className="border px-2 py-1">状态</th>
+                <th className="border px-2 py-1">时间戳</th>
+              </tr>
+              </thead>
+              <tbody>
+              {miners.map((miner, index) => (
+                  <tr key={index} className="hover:bg-gray-50">
+                    <td className="border px-2 py-1 text-center">{index + 1}</td>
+                    <td className="border px-2 py-1 break-words">{miner.ip}</td>
+                    <td className="border px-2 py-1">{miner.hash_rate}</td>
+                    <td className="border px-2 py-1 text-red-500">
+                      {miner.status}
+                    </td>
+                    <td className="border px-2 py-1">{miner.timestamp}</td>
+                  </tr>
+              ))}
+              </tbody>
+            </table>
+          </div>
       )}
     </div>
   );
