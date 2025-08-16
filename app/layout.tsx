@@ -25,28 +25,28 @@ export default function RootLayout({
   return (
     <html lang="en">
     <body>
-    <nav className="flex justify-center gap-6 p-4 bg-gray-100 shadow-md">
+    <nav className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 p-4 bg-gray-100 shadow-md">
         <a
             href="/hash"
-            className="flex-1 text-center px-10 py-2 rounded-xl bg-red-500 text-white font-semibold transition-all hover:bg-red-600 hover:scale-105"
+            className="w-full sm:flex-1 text-center px-6 py-2 rounded-xl bg-red-500 text-white font-semibold transition-all hover:bg-red-600 hover:scale-105"
         >
-            hash
+            Hash
         </a>
         <a
             href="/boxes"
-            className="flex-1 text-center px-10 py-2 rounded-xl bg-red-500 text-white font-semibold transition-all hover:bg-red-600 hover:scale-105"
+            className="w-full sm:flex-1 text-center px-6 py-2 rounded-xl bg-red-500 text-white font-semibold transition-all hover:bg-red-600 hover:scale-105"
         >
             Boxes
         </a>
         <a
             href="/task"
-            className="flex-1 text-center px-10 py-2 rounded-xl bg-red-500 text-white font-semibold transition-all hover:bg-red-600 hover:scale-105"
+            className="w-full sm:flex-1 text-center px-6 py-2 rounded-xl bg-red-500 text-white font-semibold transition-all hover:bg-red-600 hover:scale-105"
         >
             Task
         </a>
         <a
             href="/ipm"
-            className="flex-1 text-center px-10 py-2 rounded-xl bg-red-500 text-white font-semibold transition-all hover:bg-red-600 hover:scale-105"
+            className="w-full sm:flex-1 text-center px-6 py-2 rounded-xl bg-red-500 text-white font-semibold transition-all hover:bg-red-600 hover:scale-105"
         >
             Ipm
         </a>
