@@ -2,65 +2,88 @@
 
 import { useEffect, useState } from "react";
 
-export default function MinersPage() {
+export default function TaskPage() {
   const [miners, setMiners] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [lastUpdate, setLastUpdate] = useState(null);
 
-useEffect(() => {
-  async function fetchMiners() {
-    const res = await fetch("/api/task");
-    const data = await res.json();
-    setMiners(data);
-    setLoading(false);
-  }
+  useEffect(() => {
+    async function fetchMiners() {
+      const res = await fetch("/api/task");
+      const data = await res.json();
+      setMiners(data);
+      setLastUpdate(new Date().toLocaleTimeString());
+      setLoading(false);
+    }
 
-  // 先执行一次
-  fetchMiners();
+    fetchMiners(); // 初始加载
+    const intervalId = setInterval(fetchMiners, 5000); // 每 5 秒刷新
+    return () => clearInterval(intervalId); // 卸载清除
+  }, []);
+ const exportToCSV = () => {
+    if (!miners || miners.length === 0) return;
 
-  // 每 5 秒刷新一次
-  const intervalId = setInterval(fetchMiners, 5000);
+    // 去掉 _id，只保留其他字段
+    const headers = ["序号", ...Object.keys(miners[0]).filter((k) => k !== "_id")];
 
-  // 组件卸载时清除定时器
-  return () => clearInterval(intervalId);
-}, []);
+    const rows = miners.map((miner, index) => {
+      return [
+        index + 1, // 序号
+        ...Object.keys(miner)
+          .filter((k) => k !== "_id")
+          .map((h) => JSON.stringify(miner[h] ?? "")),
+      ].join(",");
+    });
+
+    const csvContent = [headers.join(","), ...rows].join("\n");
+
+    // 创建 Blob 并触发下载
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "miners_task.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center h-screen text-xl text-gray-500">
-        正在加载数据...
-      </div>
-    );
+    return <div className="text-center p-4">加载中...</div>;
   }
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">矿机任务列表</h1>
+    <div className="p-4 max-w-7xl mx-auto">
+      <h1 className="text-2xl font-bold mb-4 text-center">矿机任务列表</h1>
+       <button
+          onClick={exportToCSV}
+          className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+        >
+          导出 CSV
+        </button>
+      <p className="text-sm text-gray-500 text-center mb-4">
+        最后刷新时间: {lastUpdate}
+      </p>
 
-      <div className="overflow-x-auto shadow-lg rounded-lg">
-        <table className="min-w-full bg-white border border-gray-200 rounded-lg">
+      <div className="overflow-x-auto">
+        <table className="table-auto w-full border border-gray-200 text-sm sm:text-base">
           <thead className="bg-gray-100">
             <tr>
-              <th className="px-6 py-3 border-b text-left text-gray-600 font-semibold">IP 地址</th>
-              <th className="px-6 py-3 border-b text-left text-gray-600 font-semibold">算力</th>
-              <th className="px-6 py-3 border-b text-left text-gray-600 font-semibold">状态</th>
-              <th className="px-6 py-3 border-b text-left text-gray-600 font-semibold">时间戳</th>
+              <th className="border px-2 py-1">IP</th>
+              <th className="border px-2 py-1">哈希率</th>
+              <th className="border px-2 py-1">状态</th>
+              <th className="border px-2 py-1">时间戳</th>
             </tr>
           </thead>
           <tbody>
-            {miners.map((miner) => (
-              <tr key={miner._id} className="hover:bg-gray-50 transition">
-                <td className="px-6 py-3 border-b text-gray-800">{miner.ip}</td>
-                <td className="px-6 py-3 border-b text-gray-800">{miner.hash_rate}</td>
-                <td
-                  className={`px-6 py-3 border-b font-medium ${
-                    miner.status?.includes("WinError")
-                      ? "text-red-500"
-                      : "text-green-600"
-                  }`}
-                >
+            {miners.map((miner, index) => (
+              <tr key={index} className="hover:bg-gray-50">
+                <td className="border px-2 py-1 break-words">{miner.ip}</td>
+                <td className="border px-2 py-1">{miner.hash_rate}</td>
+                <td className="border px-2 py-1 text-red-500">
                   {miner.status}
                 </td>
-                  <td className="px-6 py-3 border-b text-gray-800">{miner.timestamp}</td>
+                <td className="border px-2 py-1">{miner.timestamp}</td>
               </tr>
             ))}
           </tbody>

@@ -41,6 +41,9 @@ export default function RootLayout({
            <a href="/task" style={{ flex: 1, textAlign: "center", margin: "0 10px", backgroundColor: "red" }}>
           task
           </a>
+           <a href="/ipm" style={{ flex: 1, textAlign: "center", margin: "0 10px", backgroundColor: "red" }}>
+          ipm
+          </a>
         </nav>
         {children}
       </body>
