@@ -27,10 +27,10 @@ export default function RootLayout({
     <body>
     <nav className="flex justify-center gap-6 p-4 bg-gray-100 shadow-md">
         <a
-            href="/"
+            href="/hash"
             className="flex-1 text-center px-10 py-2 rounded-xl bg-red-500 text-white font-semibold transition-all hover:bg-red-600 hover:scale-105"
         >
-            Home
+            hash
         </a>
         <a
             href="/boxes"

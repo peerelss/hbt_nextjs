@@ -57,8 +57,8 @@ export default function EditIPs() {
       return;
     }
 
-    const res = await fetch("/api/miners/add", {
-      method: "POST",
+    const res = await fetch("/api/miners", {
+      method: "ADD",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ boxId, ips: ipList }),
     });
