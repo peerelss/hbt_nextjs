@@ -46,6 +46,7 @@ export default function HashratePage() {
                     </tbody>
                 </table>
             </div>
+        
         </div>
     );
 }

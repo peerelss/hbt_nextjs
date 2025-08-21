@@ -6,21 +6,40 @@ export default function TaskPage() {
     const [miners, setMiners] = useState([]);
     const [loading, setLoading] = useState(true);
     const [lastUpdate, setLastUpdate] = useState(null);
-
+    const [error, setError] = useState("");
 
     useEffect(() => {
         async function fetchMiners() {
-            const res = await fetch("/api/task");
-            const data = await res.json();
-            setMiners(data);
-            setLastUpdate(new Date().toLocaleTimeString());
-            setLoading(false);
+            try {
+                const res = await fetch("/api/task");
+                if (!res.ok) {
+                    throw new Error("请求失败");
+                }
+                const data = await res.json();
+                if (Array.isArray(data) && data.length === 0) {
+                    setError("🎉 恭喜，无可用任务。");
+                } else {
+                    setMiners(data);
+                }
+            } catch (err) {
+                console.error(err);
+                setError("❌ 请求失败，请联系管理员。");
+            } finally {
+                setLoading(false);
+            }
         }
 
-        fetchMiners(); // 初始加载
-        const intervalId = setInterval(fetchMiners, 5000); // 每 5 秒刷新
-        return () => clearInterval(intervalId); // 卸载清除
+        fetchMiners();
+
+        // 自动刷新
+        const interval = setInterval(fetchMiners, 10000); // 每10秒刷新
+        return () => clearInterval(interval);
     }, []);
+
+
+
+
+
     const exportToCSV = () => {
         if (!miners || miners.length === 0) return;
 
@@ -50,7 +69,11 @@ export default function TaskPage() {
     };
 
     if (loading) {
-        return <div className="text-center p-4">加载中...</div>;
+        return <p className="text-center text-gray-500">加载中...</p>;
+    }
+
+    if (error) {
+        return <p className="text-center text-red-500">{error}</p>;
     }
 
     return (

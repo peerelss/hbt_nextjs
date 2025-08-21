@@ -58,10 +58,17 @@ export default function EditIPs() {
     }
 
     const res = await fetch("/api/miners", {
-      method: "ADD",
+      method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ boxId, ips: ipList }),
     });
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error("❌ API Error:", errorText);
+      alert("添加失败: " + errorText);
+      return;
+    }
 
     const result = await res.json();
     setMessages(result.messages || []);

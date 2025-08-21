@@ -23,7 +23,7 @@ export async function POST(req) {
     const { boxId, ips } = body;
 
     if (!boxId || !ips || !Array.isArray(ips)) {
-      return new Response(JSON.stringify({ error: "缺少参数 boxId 或 ips" }), { status: 400 });
+      return Response.json({ error: "缺少参数 boxId 或 ips" }, { status: 400 });
     }
 
     const collection = await getCollection();
@@ -31,9 +31,9 @@ export async function POST(req) {
 
     for (const ip of ips) {
       const res = await collection.updateOne(
-        { ip }, // 按 ip 去重
-        { $set: { ip, boxId } },
-        { upsert: true }
+          { ip },
+          { $set: { ip, boxId } },
+          { upsert: true }
       );
       if (res.upsertedCount > 0) {
         results.push(`${ip} 已添加`);
@@ -46,7 +46,7 @@ export async function POST(req) {
 
     return Response.json({ messages: results });
   } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+    return Response.json({ error: error.message }, { status: 500 });
   }
 }
 
