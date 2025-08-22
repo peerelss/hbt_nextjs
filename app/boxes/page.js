@@ -24,6 +24,11 @@ export default function BoxesPage() {
     : [];
   const totalHashrate = filteredIps.reduce((sum, m) => sum + (m.hash_rate || 0), 0);
   const totalPower = filteredIps.reduce((sum, m) => sum + (m.power_rt || 0), 0);
+
+  const online = filteredIps.filter(m => m.hash_rate > 0).length;
+  const offline = filteredIps.length - online;
+  const onlineRatio = filteredIps.length > 0 ? (online / filteredIps.length * 100).toFixed(1) : 0;
+
   return (
       <div className="p-6 max-w-4xl mx-auto">
         <h2 className="text-2xl font-bold mb-4">矿箱列表</h2>
@@ -46,6 +51,11 @@ export default function BoxesPage() {
           <h2 className="text-xl font-bold mb-2">矿机总览</h2>
           <p>总算力: {totalHashrate.toLocaleString()} TH/s</p>
           <p>总功耗: {totalPower.toLocaleString()} W</p>
+          <p className="text-md mt-2">
+            在线矿机: <span className="text-green-600">{online}</span> 台
+            | 离线矿机: <span className="text-red-600">{offline}</span> 台
+            | 在线比例: <span className="text-blue-600">{onlineRatio}%</span>
+          </p>
         </div>
         {/* 显示 IP 列表 */}
         {selectedBox && (
