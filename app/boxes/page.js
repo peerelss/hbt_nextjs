@@ -47,14 +47,18 @@ export default function BoxesPage() {
               </button>
           ))}
         </div>
-        <div className="mb-4 p-4 bg-gray-100 rounded-xl shadow">
-          <h2 className="text-xl font-bold mb-2">矿机总览</h2>
-          <p>总算力: {totalHashrate.toLocaleString()} TH/s</p>
-          <p>总功耗: {totalPower.toLocaleString()} W</p>
-          <p className="text-md mt-2">
-            在线矿机: <span className="text-green-600">{online}</span> 台
-            | 离线矿机: <span className="text-red-600">{offline}</span> 台
-            | 在线比例: <span className="text-blue-600">{onlineRatio}%</span>
+        <div className="mb-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-xl shadow">
+          <h2 className="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">矿机总览</h2>
+          <p className="text-gray-700 dark:text-gray-300">
+            总算力: {totalHashrate.toLocaleString()} TH/s
+          </p>
+          <p className="text-gray-700 dark:text-gray-300">
+            总功耗: {totalPower.toLocaleString()} W
+          </p>
+          <p className="text-md mt-2 text-gray-700 dark:text-gray-300">
+            在线矿机: <span className="text-green-600 dark:text-green-400">{online}</span> 台
+            | 离线矿机: <span className="text-red-600 dark:text-red-400">{offline}</span> 台
+            | 在线比例: <span className="text-blue-600 dark:text-blue-400">{onlineRatio}%</span>
           </p>
         </div>
         {/* 显示 IP 列表 */}
