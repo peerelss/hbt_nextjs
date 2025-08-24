@@ -1,8 +1,10 @@
 "use client"
+
 import { useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
+import { Suspense } from "react"
 
-export default function LoginPage() {
+function LoginForm() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
@@ -34,8 +36,13 @@ export default function LoginPage() {
 
     return (
         <div className="flex min-h-screen items-center justify-center bg-gray-100">
-            <form onSubmit={handleSubmit} className="bg-white p-8 rounded-xl shadow-md w-80 space-y-4">
-                <h1 className="text-xl font-bold text-center">{isRegister ? "注册" : "登录"}</h1>
+            <form
+                onSubmit={handleSubmit}
+                className="bg-white p-8 rounded-xl shadow-md w-80 space-y-4"
+            >
+                <h1 className="text-xl font-bold text-center">
+                    {isRegister ? "注册" : "登录"}
+                </h1>
                 {error && <p className="text-red-500 text-center">{error}</p>}
                 <input
                     type="text"
@@ -56,10 +63,21 @@ export default function LoginPage() {
                 <button className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">
                     {isRegister ? "注册" : "登录"}
                 </button>
-                <p className="text-sm text-center mt-2 cursor-pointer text-blue-500" onClick={() => setIsRegister(!isRegister)}>
+                <p
+                    className="text-sm text-center mt-2 cursor-pointer text-blue-500"
+                    onClick={() => setIsRegister(!isRegister)}
+                >
                     {isRegister ? "已有账号？登录" : "没有账号？注册"}
                 </p>
             </form>
         </div>
+    )
+}
+
+export default function LoginPage() {
+    return (
+        <Suspense fallback={<div>加载中...</div>}>
+            <LoginForm />
+        </Suspense>
     )
 }
