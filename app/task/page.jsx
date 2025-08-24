@@ -21,6 +21,7 @@ export default function TaskPage() {
                 } else {
                     setMiners(data);
                 }
+
             } catch (err) {
                 console.error(err);
                 setError("❌ 请求失败，请联系管理员。");
@@ -32,11 +33,17 @@ export default function TaskPage() {
         fetchMiners();
 
         // 自动刷新
-        const interval = setInterval(fetchMiners, 10000); // 每10秒刷新
-        return () => clearInterval(interval);
+     //   const interval = setInterval(fetchMiners, 3*60*1000); // 每10秒刷新
+    //    return () => clearInterval(interval);
     }, []);
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            window.location.reload(); // 整个页面刷新
+        }, 60*1000); // 每 10 秒刷新一次
 
+        return () => clearInterval(interval); // 组件卸载时清理
+    }, []);
 
 
 
