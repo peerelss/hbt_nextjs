@@ -88,36 +88,55 @@ export default function TaskPage() {
                 >
                     导出 CSV
                 </button>
-                <p className="text-sm text-gray-500 text-center mb-4">
+                <p className="text-sm text-gray-500 dark:text-gray-400 text-center mb-4">
                     最后刷新时间: {lastUpdate}
                 </p>
 
                 <div className="overflow-x-auto">
-                    <table className="table-auto w-full border border-gray-200 text-sm sm:text-base">
-                        <thead className="bg-gray-100">
+                    <table
+                        className="table-auto w-full border border-gray-200 dark:border-gray-700 text-sm sm:text-base">
+                        <thead className="bg-gray-100 dark:bg-gray-800">
                         <tr>
-                            <th className="border px-2 py-1">序号</th>
-                            <th className="border px-2 py-1">IP</th>
-                            <th className="border px-2 py-1">哈希率</th>
-                            <th className="border px-2 py-1">状态</th>
-                            <th className="border px-2 py-1">时间戳</th>
+                            <th className="border border-gray-200 dark:border-gray-700 px-2 py-1 text-gray-800 dark:text-gray-200">序号</th>
+                            <th className="border border-gray-200 dark:border-gray-700 px-2 py-1 text-gray-800 dark:text-gray-200">IP</th>
+                            <th className="border border-gray-200 dark:border-gray-700 px-2 py-1 text-gray-800 dark:text-gray-200">哈希率</th>
+                            <th className="border border-gray-200 dark:border-gray-700 px-2 py-1 text-gray-800 dark:text-gray-200">状态</th>
+                            <th className="border border-gray-200 dark:border-gray-700 px-2 py-1 text-gray-800 dark:text-gray-200">时间戳</th>
                         </tr>
                         </thead>
                         <tbody>
                         {miners.map((miner, index) => (
-                            <tr key={index} className="hover:bg-gray-50">
-                                <td className="border px-2 py-1 text-center">{index + 1}</td>
-                                <td className="border px-2 py-1 break-words">{miner.ip}</td>
-                                <td className="border px-2 py-1">{miner.hash_rate}</td>
-                                <td className="border px-2 py-1 text-red-500">
+                            <tr
+                                key={index}
+                                className="hover:bg-gray-50 dark:hover:bg-gray-700"
+                            >
+                                <td className="border border-gray-200 dark:border-gray-700 px-2 py-1 text-center text-gray-800 dark:text-gray-200">
+                                    {index + 1}
+                                </td>
+                                <td className="border border-gray-200 dark:border-gray-700 px-2 py-1 break-words text-gray-800 dark:text-gray-200">
+                                    {miner.ip}
+                                </td>
+                                <td className="border border-gray-200 dark:border-gray-700 px-2 py-1 text-gray-800 dark:text-gray-200">
+                                    {miner.hash_rate}
+                                </td>
+                                <td
+                                    className={`border border-gray-200 dark:border-gray-700 px-2 py-1 ${
+                                        miner.status === "success"
+                                            ? "text-green-600 dark:text-green-400"
+                                            : "text-red-500 dark:text-red-400"
+                                    }`}
+                                >
                                     {miner.status}
                                 </td>
-                                <td className="border px-2 py-1">{miner.timestamp}</td>
+                                <td className="border border-gray-200 dark:border-gray-700 px-2 py-1 text-gray-800 dark:text-gray-200">
+                                    {miner.timestamp}
+                                </td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
                 </div>
+
             </div>
         </>
     );

@@ -28,7 +28,7 @@ export default function BoxesPage() {
   const online = filteredIps.filter(m => m.hash_rate > 0).length;
   const offline = filteredIps.length - online;
   const onlineRatio = filteredIps.length > 0 ? (online / filteredIps.length * 100).toFixed(1) : 0;
-
+  const avgOnlinePower =online> 0? (totalPower/online).toFixed(2)  :0
   return (
       <div className="p-6 max-w-4xl mx-auto">
         <h2 className="text-2xl font-bold mb-4">矿箱列表</h2>
@@ -54,6 +54,9 @@ export default function BoxesPage() {
           </p>
           <p className="text-gray-700 dark:text-gray-300">
             总功耗: {totalPower.toLocaleString()} W
+          </p>
+          <p className="text-gray-700 dark:text-gray-300">
+            在线矿机平均功耗: {avgOnlinePower} W
           </p>
           <p className="text-md mt-2 text-gray-700 dark:text-gray-300">
             在线矿机: <span className="text-green-600 dark:text-green-400">{online}</span> 台
