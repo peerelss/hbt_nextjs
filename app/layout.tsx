@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type {Metadata} from "next";
+import {Geist, Geist_Mono} from "next/font/google";
 import "./globals.css";
 import HashratePage from "@/app/hash/page";
 
@@ -19,38 +19,33 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
-}: Readonly<{
+                                     children,
+                                   }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
     <body>
     <nav className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 p-4 bg-gray-100 shadow-md">
-        <a
-            href="/hash"
-            className="w-full sm:flex-1 text-center px-6 py-2 rounded-xl bg-red-500 text-white font-semibold transition-all hover:bg-red-600 hover:scale-105"
-        >
-            Hash
-        </a>
-        <a
-            href="/boxes"
-            className="w-full sm:flex-1 text-center px-6 py-2 rounded-xl bg-red-500 text-white font-semibold transition-all hover:bg-red-600 hover:scale-105"
-        >
-            Boxes
-        </a>
-        <a
-            href="/task"
-            className="w-full sm:flex-1 text-center px-6 py-2 rounded-xl bg-red-500 text-white font-semibold transition-all hover:bg-red-600 hover:scale-105"
-        >
-            Task
-        </a>
-        <a
-            href="/ipm"
-            className="w-full sm:flex-1 text-center px-6 py-2 rounded-xl bg-red-500 text-white font-semibold transition-all hover:bg-red-600 hover:scale-105"
-        >
-            Ipm
-        </a>
+
+      <a
+        href="/boxes"
+        className="w-full sm:flex-1 text-center px-6 py-2 rounded-xl bg-red-500 text-white font-semibold transition-all hover:bg-red-600 hover:scale-105"
+      >
+        Boxes
+      </a>
+      <a
+        href="/task"
+        className="w-full sm:flex-1 text-center px-6 py-2 rounded-xl bg-red-500 text-white font-semibold transition-all hover:bg-red-600 hover:scale-105"
+      >
+        Task
+      </a>
+      <a
+        href="/ipm"
+        className="w-full sm:flex-1 text-center px-6 py-2 rounded-xl bg-red-500 text-white font-semibold transition-all hover:bg-red-600 hover:scale-105"
+      >
+        Ipm
+      </a>
     </nav>
     <HashratePage/>
     {children}
