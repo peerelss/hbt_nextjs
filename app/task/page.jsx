@@ -37,14 +37,6 @@ export default function TaskPage() {
     //    return () => clearInterval(interval);
     }, []);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            window.location.reload(); // 整个页面刷新
-        }, 60*1000); // 每 10 秒刷新一次
-
-        return () => clearInterval(interval); // 组件卸载时清理
-    }, []);
-
 
 
     const exportToCSV = () => {
