@@ -47,7 +47,6 @@ export default function RootLayout({
         Ipm
       </a>
     </nav>
-    <HashratePage/>
     {children}
     </body>
     </html>
