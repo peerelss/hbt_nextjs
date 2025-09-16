@@ -46,6 +46,12 @@ export default function RootLayout({
       >
         Ipm
       </a>
+      <a
+        href="/hash"
+        className="w-full sm:flex-1 text-center px-6 py-2 rounded-xl bg-red-500 text-white font-semibold transition-all hover:bg-red-600 hover:scale-105"
+      >
+        Hash
+      </a>
     </nav>
     <HashratePage/>
     {children}
