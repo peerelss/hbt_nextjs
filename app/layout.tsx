@@ -53,7 +53,6 @@ export default function RootLayout({
         Hash
       </a>
     </nav>
-    <HashratePage/>
     {children}
     </body>
     </html>
