@@ -85,6 +85,8 @@ export default function BoxesPage() {
               <th className="border px-2 py-1">哈希率</th>
               <th className="border px-2 py-1">理论值</th>
               <th className="border px-2 py-1">实际/理论比例</th>
+
+              <th className="border px-2 py-1">功耗比例H</th>
               <th className="border px-2 py-1">功率</th>
               <th className="border px-2 py-1">状态</th>
               <th className="border px-2 py-1">时间戳</th>
@@ -97,7 +99,8 @@ export default function BoxesPage() {
                 <td className="border px-2 py-1 break-words">{miner.ip}</td>
                 <td className="border px-2 py-1">{miner.hash_rate}</td>
                 <td className="border px-2 py-1">{miner.factory_hash}</td>
-                <td className="border px-2 py-1">{(miner.hash_rate / miner.factory_hash* 100).toFixed(2) + "%"}</td>
+                <td className="border px-2 py-1">{(miner.hash_rate / miner.factory_hash * 100).toFixed(2) + "%"}</td>
+                <td className="border px-2 py-1">{(miner.power_rt / miner.hash_rate).toFixed(2)}</td>
                 <td className="border px-2 py-1">{miner.power_rt}</td>
                 <td className="border px-2 py-1 text-red-500">
                   {miner.status}
