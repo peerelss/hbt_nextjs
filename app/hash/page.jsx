@@ -9,7 +9,7 @@ export default function HashratePage() {
   const theoreticalHash = {
     "tope1": 0.0019,          // TH/s
     "hashunion600": 123, // PH/s
-    "topb1": 381          // PH/s
+    "topb1": 504          // PH/s
   };
   const toPHs = (hashrate) => {
     if (hashrate.includes("TH/s")) {
